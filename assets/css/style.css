@@ -144,7 +144,7 @@ main>section:not(.hero),.ftr{content-visibility:auto;contain-intrinsic-size:auto
 .sec-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:clamp(36px,5vw,72px)}
 .sec-head>p{margin:0;max-width:400px;font-size:16px;line-height:1.7}
 .stats{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:20px}
-.st{display:flex;grid-column:span 3}
+.st{display:flex;grid-column:span 4}
 .st.s7{grid-column:span 7}
 .st.s5{grid-column:span 5}
 .st-box{position:relative;flex:1;overflow:hidden;padding:clamp(18px,2vw,32px);min-height:260px;border:1px solid #D5DAD4;background:#fff;color:#121A16}
@@ -327,19 +327,12 @@ main>section:not(.hero),.ftr{content-visibility:auto;contain-intrinsic-size:auto
 
 /* clients */
 .clients{background:#fff;padding:0 0 clamp(72px,9vw,150px)}
-.cli-lab{font:600 12px Inter,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#0F3A2E;padding:0 clamp(20px,5vw,80px);max-width:1600px;margin:0 auto 14px}
 .marq{overflow-x:auto;scrollbar-width:none;background:#fff}
 .marq::-webkit-scrollbar{display:none}
-.marq.m1{border-top:1px solid #D5DAD4;border-bottom:1px solid #D5DAD4}
 .marq-in{display:flex;flex-wrap:nowrap;width:max-content;justify-content:flex-start}
 .m2 .marq-in{gap:16px;padding:0 8px}
-.lg{flex:none;width:clamp(170px,14vw,230px);height:clamp(110px,9vw,140px);display:flex;align-items:center;justify-content:center;padding:0 24px}
-.lg img{height:clamp(64px,5.4vw,84px);width:auto;max-width:100%;object-fit:contain}
 .ind{flex:none;width:clamp(220px,19vw,320px);height:clamp(140px,12vw,200px);object-fit:cover;display:block}
 @media (prefers-reduced-motion:reduce){.marq-in{flex-wrap:wrap;width:100%;justify-content:center}.marq [aria-hidden=true]{display:none}}
-.m-gap{height:clamp(28px,3vw,48px)}
-.cli-note{padding-top:24px}
-.cli-note p{margin:0;font-size:13px;color:#3d4a43}
 
 /* cta */
 .cta{overflow:hidden}
@@ -409,6 +402,7 @@ main>section:not(.hero),.ftr{content-visibility:auto;contain-intrinsic-size:auto
 .collage{height:580px}
 .stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .st,.st.s7,.st.s5{grid-column:span 1}
+.st.last{grid-column:span 2}
 .st.big{grid-column:span 2}
 .st-box{min-height:190px}
 .st.big .st-box{min-height:300px}

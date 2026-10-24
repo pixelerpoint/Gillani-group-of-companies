@@ -207,7 +207,7 @@
       if (visible && !running) { running = true; measure(); requestAnimationFrame(tick); }
     }).observe(el);
   }
-  marquee($('#marq1'), 1); marquee($('#marq2'), -1);
+  marquee($('#marq2'), -1);
 
   /* ---------- map pins (labels on tap for small screens) ---------- */
   $$('.pin').forEach(function (p) {
