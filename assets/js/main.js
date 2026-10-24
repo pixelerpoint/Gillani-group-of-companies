@@ -75,18 +75,24 @@
   if (!reduced && w.matchMedia('(scripting: enabled)').matches) setStats(0);
 
   /* ---------- header, progress bar, parallax ---------- */
-  var hdr = $('#hdr'), bar = $('[data-scrollbar]'), collage = $('#collage'), par = $('#par'), sr = 0;
+  // [data-par] images are taller than their frame and drift gently as the frame crosses the screen
+  var hdr = $('#hdr'), bar = $('[data-scrollbar]'), pars = $$('[data-par]'), sr = 0;
   function onScroll() {
     if (sr) return;
     sr = requestAnimationFrame(function () {
       sr = 0;
       // all reads first, then all writes, to avoid forcing extra layouts
-      var max = root.scrollHeight - root.clientHeight, y = w.scrollY;
-      var r = !reduced && vw() >= 960 ? collage.getBoundingClientRect() : null;
+      var max = root.scrollHeight - root.clientHeight, y = w.scrollY, vh = w.innerHeight, moves = [];
+      if (!reduced && vw() >= 700) pars.forEach(function (img) {
+        var r = img.parentElement.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > vh) return;
+        var room = (img.clientHeight - r.height) / 2, off = ((r.top + r.height / 2) - vh / 2) * -0.12;
+        moves.push([img, Math.max(-room, Math.min(room, off))]);
+      });
       sweep();
       bar.style.width = (max > 0 ? y / max * 100 : 0) + '%';
       hdr.classList.toggle('scrolled', y > 40);
-      par.style.transform = r ? 'translateY(' + Math.round(((r.top + r.height / 2) - w.innerHeight / 2) * 0.08) + 'px)' : '';
+      moves.forEach(function (m) { m[0].style.transform = 'translate3d(0,' + m[1].toFixed(1) + 'px,0)'; });
     });
   }
   w.addEventListener('scroll', onScroll, { passive: true });
@@ -179,35 +185,6 @@
   var px = 0;
   carousel.addEventListener('touchstart', function (e) { px = e.touches[0].clientX; pHover = true; }, { passive: true });
   carousel.addEventListener('touchend', function (e) { var dx = e.changedTouches[0].clientX - px; if (Math.abs(dx) > 50) pMove(dx < 0 ? 1 : -1); pHover = false; });
-
-  /* ---------- marquees ---------- */
-  function marquee(el, dir) {
-    var inner = el.firstElementChild, paused = false, started = false, visible = false, running = false, half = 0, pos = 0;
-    whenNear(el, function () { loadImgs(el); });
-    if (reduced) return;
-    Array.prototype.slice.call(inner.children).forEach(function (c) { var k = c.cloneNode(true); k.setAttribute('aria-hidden', 'true'); (k.tagName === 'IMG' ? [k] : $$('img', k)).forEach(function (i) { i.alt = ''; }); inner.appendChild(k); });
-    var measure = function () { half = inner.scrollWidth / 2; };
-    w.addEventListener('resize', measure);
-    ['mouseenter', 'focus', 'touchstart'].forEach(function (ev) { el.addEventListener(ev, function () { paused = true; }, { passive: true }); });
-    ['mouseleave', 'blur', 'touchend'].forEach(function (ev) { el.addEventListener(ev, function () { paused = false; pos = el.scrollLeft; }); });
-    function tick() {
-      if (!visible) { running = false; return; }
-      if (half < 50) measure();
-      if (!paused && half >= 50) {
-        if (!started) { started = true; pos = dir < 0 ? half : 0; }
-        pos += 0.6 * dir;
-        if (pos >= half) pos -= half; else if (pos <= 0 && dir < 0) pos += half;
-        el.scrollLeft = pos;
-      }
-      requestAnimationFrame(tick);
-    }
-    // only animate while the strip is on screen
-    new IntersectionObserver(function (es) {
-      visible = es[0].isIntersecting;
-      if (visible && !running) { running = true; measure(); requestAnimationFrame(tick); }
-    }).observe(el);
-  }
-  marquee($('#marq2'), -1);
 
   /* ---------- map pins (labels on tap for small screens) ---------- */
   $$('.pin').forEach(function (p) {
