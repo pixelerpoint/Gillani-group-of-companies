@@ -31,7 +31,7 @@
     done.add(tg); if (io) io.unobserve(tg);
     if (tg === statsEl) startStats();
     if (tg === mapEl) mapEl.classList.add('on');
-    (groups.get(tg) || []).forEach(function (el) { el.classList.add('in'); });
+    (groups.get(tg) || []).forEach(function (el) { if (el._d) el.style.setProperty('--d', el._d); el.classList.add('in'); });
   }
   var statsEl = $('#stats'), mapEl = $('#map');
   if ('IntersectionObserver' in w) {
@@ -41,9 +41,10 @@
     var v = el.getAttribute('data-rv');
     var tg = (v === 'img' || v === 'mline' || v === 'line' || v === 'vline') ? el.parentElement : el;
     if (!reduced) {
+      // stagger delay is stored now and applied when the element reveals, so start-up does no style writes
       var rd = el.getAttribute('data-rd');
       var sibs = Array.prototype.filter.call(el.parentNode.children, function (c) { return c.hasAttribute('data-rv'); });
-      el.style.setProperty('--d', ((rd != null ? +rd : Math.max(0, sibs.indexOf(el))) * 90) + 'ms');
+      el._d = ((rd != null ? +rd : Math.max(0, sibs.indexOf(el))) * 90) + 'ms';
     }
     if (!groups.has(tg)) groups.set(tg, []);
     groups.get(tg).push(el);
@@ -89,25 +90,61 @@
         var room = (img.clientHeight - r.height) / 2, off = ((r.top + r.height / 2) - vh / 2) * -0.12;
         moves.push([img, Math.max(-room, Math.min(room, off))]);
       });
+      var at = spyRead();
       sweep();
       bar.style.width = (max > 0 ? y / max * 100 : 0) + '%';
       hdr.classList.toggle('scrolled', y > 40);
       moves.forEach(function (m) { m[0].style.transform = 'translate3d(0,' + m[1].toFixed(1) + 'px,0)'; });
+      spyWrite(at);
     });
   }
   w.addEventListener('scroll', onScroll, { passive: true });
   hdr.classList.toggle('scrolled', w.scrollY > 40);
 
+  /* ---------- sticky in-page menu: highlights the section in view, indicator slides to it ---------- */
+  var spy = $('.subnav'), spyLinks = spy ? $$('.sn-list a', spy) : [], spyCur = -1;
+  var spySecs = spyLinks.map(function (a) { return d.getElementById(a.hash.slice(1)); });
+  function spyRead() {
+    if (!spy) return -1;
+    var line = spy.getBoundingClientRect().bottom + 24, at = -1;
+    spySecs.forEach(function (s, i) { if (s.getBoundingClientRect().top <= line) at = i; });
+    return at;
+  }
+  function placeInd() {
+    var ind = $('.sn-ind', spy), box = $('.sn-scroll', spy), a = spyLinks[spyCur];
+    if (!a) { ind.style.opacity = 0; return; }
+    ind.style.opacity = 1; ind.style.transform = 'translateX(' + a.offsetLeft + 'px) scaleX(' + a.offsetWidth + ')';
+    // on the mobile swipe bar, keep the active item in view
+    if (a.offsetLeft < box.scrollLeft + 16 || a.offsetLeft + a.offsetWidth > box.scrollLeft + box.clientWidth - 16) box.scrollTo({ left: a.offsetLeft - 32, behavior: reduced ? 'auto' : 'smooth' });
+  }
+  function spyWrite(at) {
+    if (!spy || at === spyCur) return;
+    spyCur = at;
+    spyLinks.forEach(function (a, i) { a.classList.toggle('on', i === at); if (i === at) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
+    placeInd();
+  }
+  if (spy) w.addEventListener('resize', placeInd);
+
   /* ---------- desktop dropdowns ---------- */
-  $$('.nav-i.has-dd').forEach(function (it) {
-    var a = it.firstElementChild;
-    function set(o) { it.classList.toggle('open', o); a.setAttribute('aria-expanded', o ? 'true' : 'false'); }
-    it.addEventListener('mouseenter', function () { set(true); });
-    it.addEventListener('mouseleave', function () { set(false); });
-    it.addEventListener('focusin', function () { set(true); });
+  // opens on mouse hover, on click/tap of the arrow button, and from the keyboard (Enter/Space/arrows, Esc closes)
+  var dds = $$('.nav-i.has-dd');
+  dds.forEach(function (it) {
+    var btn = $('.dd-btn', it), links = $$('.dd a', it);
+    function set(o) { it.classList.toggle('open', o); btn.setAttribute('aria-expanded', o ? 'true' : 'false'); }
+    function move(e, dir) { e.preventDefault(); var i = links.indexOf(d.activeElement); links[(i + dir + links.length) % links.length].focus(); }
+    it.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') set(true); });
+    it.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') set(false); });
+    // a mouse click keeps a hover-opened menu open; keyboard and touch toggle it
+    btn.addEventListener('click', function (e) { var o = e.pointerType === 'mouse' || !it.classList.contains('open'); dds.forEach(function (x) { if (x !== it) { x.classList.remove('open'); $('.dd-btn', x).setAttribute('aria-expanded', 'false'); } }); set(o); });
+    btn.addEventListener('keydown', function (e) { if (e.key === 'ArrowDown') { e.preventDefault(); set(true); links[0].focus(); } });
+    links.forEach(function (l) { l.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown') move(e, 1); else if (e.key === 'ArrowUp') move(e, -1);
+      else if (e.key === 'Home') { e.preventDefault(); links[0].focus(); } else if (e.key === 'End') { e.preventDefault(); links[links.length - 1].focus(); }
+    }); });
+    it.addEventListener('keydown', function (e) { if (e.key === 'Escape' && it.classList.contains('open')) { set(false); btn.focus(); } });
     it.addEventListener('focusout', function (e) { if (!it.contains(e.relatedTarget)) set(false); });
-    it.addEventListener('keydown', function (e) { if (e.key === 'Escape') { set(false); a.focus(); } });
   });
+  d.addEventListener('click', function (e) { dds.forEach(function (it) { if (!it.contains(e.target)) { it.classList.remove('open'); $('.dd-btn', it).setAttribute('aria-expanded', 'false'); } }); });
 
   /* ---------- mobile drawer ---------- */
   var drawer = $('#drawer'), menuBtn = $('#menuBtn');
@@ -198,6 +235,52 @@
     var off = function () { p.classList.remove('show'); };
     p.addEventListener('mouseenter', on); p.addEventListener('focus', on); p.addEventListener('click', on);
     p.addEventListener('mouseleave', off); p.addEventListener('blur', off);
+  });
+
+  /* ---------- tabs (ARIA: arrows, Home/End; links with data-tab open a tab) ---------- */
+  $$('[role="tablist"]').forEach(function (list) {
+    var tabs = $$('[role="tab"]', list);
+    function select(tab, focus) {
+      tabs.forEach(function (t) {
+        var on = t === tab, panel = d.getElementById(t.getAttribute('aria-controls'));
+        t.setAttribute('aria-selected', on ? 'true' : 'false'); t.tabIndex = on ? 0 : -1; panel.hidden = !on;
+      });
+      if (focus) tab.focus();
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { select(t); });
+      t.addEventListener('keydown', function (e) {
+        var k = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
+        if (k == null) return; e.preventDefault(); select(tabs[(k + tabs.length) % tabs.length], true);
+      });
+    });
+    $$('[data-tab]').forEach(function (a) { a.addEventListener('click', function () { var t = d.getElementById(a.getAttribute('data-tab')); if (t && tabs.indexOf(t) > -1) select(t); }); });
+  });
+
+  /* ---------- accordion ---------- */
+  $$('.faq-q').forEach(function (b) {
+    b.addEventListener('click', function () { var o = b.getAttribute('aria-expanded') !== 'true'; b.setAttribute('aria-expanded', o ? 'true' : 'false'); b.parentNode.parentNode.classList.toggle('open', o); });
+  });
+
+  /* ---------- forms that send an enquiry through WhatsApp ---------- */
+  $$('form[data-wa]').forEach(function (f) {
+    var status = $('.form-status', f);
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var first = null, text = f.getAttribute('data-wa') + '\n';
+      if ((f.elements.website || {}).value) return; // spam trap filled in: ignore
+      $$('[data-req]', f).forEach(function (x) {
+        var msg = String(x.value).trim() ? '' : 'This field is required.'; $('#' + x.id + '-e').textContent = msg;
+        if (msg) { x.setAttribute('aria-invalid', 'true'); if (!first) first = x; } else x.removeAttribute('aria-invalid');
+      });
+      if (first) { first.focus(); return; }
+      $$('input,select,textarea', f).forEach(function (x) {
+        var v = String(x.value).trim().slice(0, 500), lab = x.id && $('label[for="' + x.id + '"]', f);
+        if (v && lab && x.name !== 'website') text += '\n' + lab.textContent.replace(' *', '') + ': ' + v;
+      });
+      w.open('https://wa.me/923001114901?text=' + encodeURIComponent(text), '_blank', 'noopener');
+      status.textContent = 'WhatsApp is opening with your enquiry. Press send to reach our team.';
+    });
   });
 
   /* ---------- quote modal (sends the enquiry through WhatsApp; no server form yet) ---------- */
