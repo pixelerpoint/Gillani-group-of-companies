@@ -1,0 +1,61 @@
+# Gillani Group Of Companies — server rules (Hostinger / LiteSpeed)
+
+Options -Indexes
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+
+# ---------- HTTPS + non-www ----------
+RewriteEngine On
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^ https://gillanigroupofcompanies.com%{REQUEST_URI} [L,R=301]
+
+# ---------- Block private files ----------
+# Hide git data, dotfiles, docs and source files that live in the repo
+RewriteRule (^|/)\.(?!well-known/) - [F,L]
+<FilesMatch "\.(md|zip|py|sh|log|bak|sql|env|ini|lock|json)$">
+  Require all denied
+</FilesMatch>
+<Files "site.webmanifest">
+  Require all granted
+</Files>
+
+# ---------- Security headers ----------
+<IfModule mod_headers.c>
+  Header always set Strict-Transport-Security "max-age=31536000"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+  Header unset X-Powered-By
+
+  # Content-Security-Policy: enable once the site is built and tested.
+  # Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'"
+</IfModule>
+
+# ---------- Compression ----------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript application/xml application/rss+xml image/svg+xml application/manifest+json
+</IfModule>
+
+# ---------- Browser caching ----------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 month"
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/avif "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
