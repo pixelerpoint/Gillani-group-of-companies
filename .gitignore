@@ -1,0 +1,8 @@
+_design_source/
+screenshots/
+diffs/
+node_modules/
+*_backup*
+*.bak
+.env
+*.zip
