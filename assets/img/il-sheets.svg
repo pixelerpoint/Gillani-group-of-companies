@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+<defs><pattern id="s" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(35)"><rect width="22" height="22" fill="#164A3B"/><path d="M0 4h22M0 11h14M0 18h22" stroke="#2E6A57" stroke-width="3"/></pattern><pattern id="t" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(-25)"><rect width="22" height="22" fill="#0F3A2E"/><path d="M0 5h22M6 12h16M0 19h22" stroke="#24594A" stroke-width="3"/></pattern></defs>
+<rect width="800" height="500" fill="#0B2E24"/>
+<path d="M0 430h800v70H0z" fill="#082219"/>
+<path d="M150 420l120 -90h390l-120 90z" fill="#0F3A2E" stroke="#D2A64B" stroke-width="2"/><path d="M150 420v14h390v-14M540 434l120 -90v-14" fill="none" stroke="#D2A64B" stroke-width="2" opacity=".8"/>
+<path d="M158 394l120 -90h390l-120 90z" fill="#164A3B" stroke="#D2A64B" stroke-width="2"/><path d="M158 394v14h390v-14M548 408l120 -90v-14" fill="none" stroke="#D2A64B" stroke-width="2" opacity=".8"/>
+<path d="M166 368l120 -90h390l-120 90z" fill="#0F3A2E" stroke="#D2A64B" stroke-width="2"/><path d="M166 368v14h390v-14M556 382l120 -90v-14" fill="none" stroke="#D2A64B" stroke-width="2" opacity=".8"/>
+<path d="M150 342l120 -90h390l-120 90z" fill="#164A3B" stroke="#D2A64B" stroke-width="2"/><path d="M150 342v14h390v-14M540 356l120 -90v-14" fill="none" stroke="#D2A64B" stroke-width="2" opacity=".8"/>
+<path d="M158 316l120 -90h390l-120 90z" fill="#0F3A2E" stroke="#D2A64B" stroke-width="2"/><path d="M158 316v14h390v-14M548 330l120 -90v-14" fill="none" stroke="#D2A64B" stroke-width="2" opacity=".8"/>
+<path d="M166 290l120 -90h390l-120 90z" fill="#164A3B" stroke="#D2A64B" stroke-width="2"/><path d="M166 290v14h390v-14M556 304l120 -90v-14" fill="none" stroke="#D2A64B" stroke-width="2" opacity=".8"/>
+<path d="M150 264l120 -90h390l-120 90z" fill="#0F3A2E" stroke="#D2A64B" stroke-width="2"/><path d="M150 264v14h390v-14M540 278l120 -90v-14" fill="none" stroke="#D2A64B" stroke-width="2" opacity=".8"/>
+<path d="M158 238l120 -90h390l-120 90z" fill="#164A3B" stroke="#D2A64B" stroke-width="2"/><path d="M158 238v14h390v-14M548 252l120 -90v-14" fill="none" stroke="#D2A64B" stroke-width="2" opacity=".8"/>
+<path d="M166 212l120 -90h390l-120 90z" fill="#0F3A2E" stroke="#D2A64B" stroke-width="2"/><path d="M166 212v14h390v-14M556 226l120 -90v-14" fill="none" stroke="#D2A64B" stroke-width="2" opacity=".8"/>
+</svg>

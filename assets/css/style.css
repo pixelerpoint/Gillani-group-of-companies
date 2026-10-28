@@ -204,6 +204,9 @@ main>section:not(.hero){content-visibility:auto;contain-intrinsic-size:auto 1200
 .card-cta span{display:inline-block;transition:transform .4s ease}
 .card:hover .card-cta span,.card:focus .card-cta span{transform:translateX(10px)}
 .ill{font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.9}
+.card-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.card-links a,.card-links a:hover{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid rgba(255,255,255,.75);color:#fff;font:600 12px Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;transition:background-color .25s ease,border-color .25s ease,color .25s ease}
+.card-links a:hover{background:#D2A64B;border-color:#D2A64B;color:#0B2E24}
 .big .ill{opacity:0}
 
 /* ecosystem */
@@ -490,6 +493,20 @@ ul.chips{list-style:none;margin:0;padding:0}
 .grades{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:24px}
 .grades>li{display:flex;grid-column:span 2}
 .grades>li:nth-child(n+4){grid-column:span 3}
+.grades.g4>li{grid-column:span 3}
+/* product pages: more products */
+.rel-g{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.rel-g>li{display:flex}
+.rel-c,.rel-c:hover{flex:1;display:flex;flex-direction:column;background:#F5F4EF;border:1px solid #E4E2DA;color:#0F3A2E;transition:border-color .35s ease,box-shadow .35s ease,translate .35s ease}
+.rel-c:hover{border-color:#D2A64B;translate:0 -6px;box-shadow:0 18px 36px -22px rgba(11,46,36,.45)}
+.rel-img{display:block;aspect-ratio:16/10;overflow:hidden;background:#0B2E24}
+.rel-img img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .45s ease}
+.rel-c:hover .rel-img img{transform:scale(1.05)}
+.rel-b{flex:1;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 22px 22px}
+.rel-t{display:block;font:600 19px/1.25 Sora,sans-serif}
+.rel-d{display:block;margin-top:6px;font-size:14px;line-height:1.5;color:#3d4a43}
+.rel-a{flex:none;display:flex;align-items:center;justify-content:center;width:38px;height:38px;border:1px solid #0F3A2E;border-radius:50%;transition:background-color .3s ease,color .3s ease,border-color .3s ease}
+.rel-c:hover .rel-a{background:#D2A64B;border-color:#D2A64B;color:#0B2E24}
 .gc{flex:1;display:flex;flex-direction:column;background:#fff;border:1px solid #E4E2DA;transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease}
 .gc:hover{transform:translateY(-6px);box-shadow:0 18px 36px -22px rgba(11,46,36,.45);border-color:#D2A64B}
 .gc-img{position:relative;aspect-ratio:16/10;overflow:hidden;background:#0B2E24}
@@ -562,7 +579,7 @@ ul.chips{list-style:none;margin:0;padding:0}
 .fh-cards{position:relative;height:440px}
 .fh-card{position:absolute;margin:0;width:min(300px,100%);padding:10px 10px 16px;background:#fff;color:#0F3A2E;box-shadow:0 30px 60px -20px rgba(0,0,0,.6);transition:transform .6s cubic-bezier(.2,.7,.2,1)}
 .fh-card::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:#D2A64B}
-.fh-card img{display:block;width:100%;height:auto}
+.fh-card img{display:block;width:100%;height:auto;aspect-ratio:8/5;object-fit:cover}
 .fh-card figcaption{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:14px 6px 0}
 .fh-card b{font:600 17px Sora,sans-serif}
 .fh-card span{font:600 11px Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#164A3B}
@@ -706,7 +723,8 @@ html{scroll-padding-top:64px}
 .subnav{top:64px}
 .ips.five{grid-template-columns:repeat(3,minmax(0,1fr))}
 .grades{grid-template-columns:repeat(2,minmax(0,1fr))}
-.grades>li,.grades>li:nth-child(n+4){grid-column:span 1}
+.grades>li,.grades>li:nth-child(n+4),.grades.g4>li{grid-column:span 1}
+.rel-g{grid-template-columns:repeat(2,minmax(0,1fr))}
 .why-cards.excl{grid-template-columns:repeat(2,minmax(0,1fr))}
 .insp{grid-template-columns:1fr}
 .faq-g{grid-template-columns:1fr}
@@ -765,6 +783,7 @@ html{scroll-padding-top:64px}
 .ips.five{grid-template-columns:1fr 1fr}
 .ip{padding:22px}
 .grades{grid-template-columns:1fr}
+.rel-g{grid-template-columns:1fr}
 .why-cards.excl{grid-template-columns:1fr}
 .spec tr,.spec th,.spec td{display:block;width:auto}
 .spec th{padding:14px 16px 2px;border-bottom:0}
