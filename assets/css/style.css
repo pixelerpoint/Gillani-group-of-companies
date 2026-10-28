@@ -347,9 +347,6 @@ main>section:not(.hero){content-visibility:auto;contain-intrinsic-size:auto 1200
 
 /* network */
 .net-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:32px;margin-bottom:clamp(28px,4vw,56px)}
-.net-big{display:flex;align-items:baseline;gap:16px}
-.net-big div:first-child{font:200 clamp(60px,7vw,110px)/1 Sora,sans-serif;color:#D2A64B;letter-spacing:-.03em}
-.net-big div+div{font:500 12px/1.5 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;max-width:160px}
 .map{position:relative;width:100%;aspect-ratio:2/1}
 .map>img,.map>svg{position:absolute;inset:0;width:100%;height:100%;display:block}
 .map path{fill:none;stroke:#D2A64B;stroke-width:1.2;stroke-opacity:.85;stroke-dasharray:1;transition:stroke-dashoffset 1.8s ease}
