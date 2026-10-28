@@ -25,7 +25,7 @@
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="/assets/fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/style.css?v=9">
+<link rel="stylesheet" href="/assets/css/style.css?v=10">
 <script src="/assets/js/main.js?v=4" defer></script>
 <script type="application/ld+json">
 {"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://gillanigroupofcompanies.com/#organization", "name": "Gillani Group Of Companies", "url": "https://gillanigroupofcompanies.com/", "logo": "https://gillanigroupofcompanies.com/assets/img/logo-color.webp"}, {"@type": "Service", "@id": "https://gillanigroupofcompanies.com/services/local-trading/#service", "name": "Local Trading", "serviceType": "Local steel and metals trading", "url": "https://gillanigroupofcompanies.com/services/local-trading/", "description": "Scrap, steel and metals traded locally across Pakistan.", "provider": {"@id": "https://gillanigroupofcompanies.com/#organization"}, "areaServed": {"@type": "Country", "name": "Pakistan"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://gillanigroupofcompanies.com/"}, {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://gillanigroupofcompanies.com/#services"}, {"@type": "ListItem", "position": 3, "name": "Local Trading", "item": "https://gillanigroupofcompanies.com/services/local-trading/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What do you trade locally?", "acceptedAnswer": {"@type": "Answer", "text": "Ferrous scrap, non-ferrous metals, flat and long steel, and raw materials, the same products the group sources overseas."}}, {"@type": "Question", "name": "Where are your offices?", "acceptedAnswer": {"@type": "Answer", "text": "Our head office is in Lahore, with regional offices in Islamabad and Peshawar."}}, {"@type": "Question", "name": "Can you deliver to our site?", "acceptedAnswer": {"@type": "Answer", "text": "Inland transportation of material to the buyer is one of our services. Delivery is arranged per order."}}, {"@type": "Question", "name": "What is the minimum order?", "acceptedAnswer": {"@type": "Answer", "text": "The minimum order is discussed per order. Contact us with the product and quantity you need."}}, {"@type": "Question", "name": "How do I send an enquiry?", "acceptedAnswer": {"@type": "Answer", "text": "Use the form on this page, send a WhatsApp message to +92 300 1114901, or email gillanienterprises@gmail.com."}}]}]}
@@ -42,15 +42,13 @@
 <nav class="nav d-only" aria-label="Primary">
 <div class="nav-i"><a href="/">Home</a></div>
 <div class="nav-i"><a href="/about/">About Us</a></div>
-<div class="nav-i has-dd"><a href="/#ecosystem">Group Companies</a><button class="dd-btn" type="button" aria-expanded="false" aria-controls="dd-companies" aria-label="Show Group Companies links"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></button>
-<div class="dd" id="dd-companies"><a href="/#ecosystem">Gillani Enterprises</a><a href="/#ecosystem">Gillani Trading</a><a href="/#ecosystem">King Bridge Regal Trading L.L.C.</a><a href="/#ecosystem">Kingsbridge Metals</a><a href="/#ecosystem">ASM Buildings</a><a href="/#ecosystem">Touheed Enterprises</a></div></div>
+<div class="nav-i"><a href="/group-companies/">Group Companies</a></div>
 <div class="nav-i has-dd"><a href="/#products">Products</a><button class="dd-btn" type="button" aria-expanded="false" aria-controls="dd-products" aria-label="Show Products links"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></button>
 <div class="dd" id="dd-products"><a href="/products/ferrous-scrap/">Ferrous Scrap</a><a href="/products/non-ferrous-metals/">Non-Ferrous Metals</a><a href="/products/flat-steel/">Flat Steel</a><a href="/products/long-steel/">Long Steel</a><a href="/products/raw-materials/">Raw Materials</a></div></div>
 <div class="nav-i has-dd"><a class="active" href="/#services">Services</a><button class="dd-btn" type="button" aria-expanded="false" aria-controls="dd-services" aria-label="Show Services links"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></button>
 <div class="dd" id="dd-services"><a href="/services/steel-indenting-import/">Steel Indenting &amp; Import</a><a href="/services/local-trading/" aria-current="page">Local Trading</a><a href="/services/export-international-trade/">Export &amp; International Trade</a><a href="/services/transportation/">Transportation</a><a href="/services/pre-engineered-steel-buildings/">Pre-Engineered Steel Buildings</a><a href="/services/construction-infrastructure/">Construction &amp; Infrastructure</a></div></div>
-<div class="nav-i"><a href="/#projects">Projects</a></div>
-<div class="nav-i"><a href="/#industries">Industries</a></div>
-<div class="nav-i"><a href="/#contact">Contact</a></div>
+<div class="nav-i"><a href="/projects/">Projects</a></div>
+<div class="nav-i"><a href="/contact/">Contact</a></div>
 </nav>
 <div class="hdr-cta d-only">
 <a class="wa-link" href="https://wa.me/923001114901" aria-label="WhatsApp enquiry" rel="noopener noreferrer"><span class="sq"></span>WhatsApp</a>
@@ -66,15 +64,13 @@
 <div class="drawer" id="drawer" role="dialog" aria-label="Menu" hidden>
 <div class="dr-i"><div class="dr-row"><a href="/">Home</a></div></div>
 <div class="dr-i"><div class="dr-row"><a href="/about/">About Us</a></div></div>
-<div class="dr-i"><div class="dr-row"><a href="/#ecosystem">Group Companies</a><button type="button" aria-expanded="false" aria-label="Expand Group Companies">+</button></div>
-<div class="dr-sub" hidden><a href="/#ecosystem">Gillani Enterprises</a><a href="/#ecosystem">Gillani Trading</a><a href="/#ecosystem">King Bridge Regal Trading L.L.C.</a><a href="/#ecosystem">Kingsbridge Metals</a><a href="/#ecosystem">ASM Buildings</a><a href="/#ecosystem">Touheed Enterprises</a></div></div>
+<div class="dr-i"><div class="dr-row"><a href="/group-companies/">Group Companies</a></div></div>
 <div class="dr-i"><div class="dr-row"><a href="/#products">Products</a><button type="button" aria-expanded="false" aria-label="Expand Products">+</button></div>
 <div class="dr-sub" hidden><a href="/products/ferrous-scrap/">Ferrous Scrap</a><a href="/products/non-ferrous-metals/">Non-Ferrous Metals</a><a href="/products/flat-steel/">Flat Steel</a><a href="/products/long-steel/">Long Steel</a><a href="/products/raw-materials/">Raw Materials</a></div></div>
 <div class="dr-i"><div class="dr-row"><a href="/#services">Services</a><button type="button" aria-expanded="false" aria-label="Expand Services">+</button></div>
 <div class="dr-sub" hidden><a href="/services/steel-indenting-import/">Steel Indenting &amp; Import</a><a href="/services/local-trading/" aria-current="page">Local Trading</a><a href="/services/export-international-trade/">Export &amp; International Trade</a><a href="/services/transportation/">Transportation</a><a href="/services/pre-engineered-steel-buildings/">Pre-Engineered Steel Buildings</a><a href="/services/construction-infrastructure/">Construction &amp; Infrastructure</a></div></div>
-<div class="dr-i"><div class="dr-row"><a href="/#projects">Projects</a></div></div>
-<div class="dr-i"><div class="dr-row"><a href="/#industries">Industries</a></div></div>
-<div class="dr-i"><div class="dr-row"><a href="/#contact">Contact</a></div></div>
+<div class="dr-i"><div class="dr-row"><a href="/projects/">Projects</a></div></div>
+<div class="dr-i"><div class="dr-row"><a href="/contact/">Contact</a></div></div>
 <a class="dr-wa" href="https://wa.me/923001114901" rel="noopener noreferrer">Chat on WhatsApp</a>
 </div>
 
@@ -193,7 +189,7 @@
 <div class="wrap cta-in">
 <div><h2 class="cta-h" id="h-cta" data-rv="up">Know who you are <span class="b g">buying from.</span></h2>
 <p class="cta-p" data-rv="up">Gillani Group Of Companies has traded steel and metals since 2002.</p></div>
-<div class="cta-btns" data-rv="up"><a class="cta-q" href="/about/">About Us</a><a class="cta-wa" href="/#contact">Contact</a></div>
+<div class="cta-btns" data-rv="up"><a class="cta-q" href="/about/">About Us</a><a class="cta-wa" href="/contact/">Contact</a></div>
 </div>
 </section>
 </main>
@@ -203,9 +199,9 @@
 <div class="ftr-g">
 <div data-rv="up"><div class="ftr-logo"><img src="/assets/img/logo-color-280.webp" width="137" height="110" alt="Gillani Group Of Companies" loading="lazy" decoding="async"></div><p>Connecting Industries. Building Global Partnerships.</p></div>
 <nav data-rv="up" aria-label="Quick links"><div class="ftr-t">Quick Links</div>
-<div class="ftr-links"><a href="/">Home</a><a href="/about/">About Us</a><a href="/#ecosystem">Group Companies</a><a href="/#products">Products</a><a href="/#services">Services</a><a href="/#projects">Projects</a><a href="/#industries">Industries</a><a href="/#contact">Contact</a></div></nav>
+<div class="ftr-links"><a href="/">Home</a><a href="/about/">About Us</a><a href="/group-companies/">Group Companies</a><a href="/#products">Products</a><a href="/#services">Services</a><a href="/projects/">Projects</a><a href="/contact/">Contact</a></div></nav>
 <nav data-rv="up" aria-label="Group companies"><div class="ftr-t">Group Companies</div>
-<div class="ftr-links"><a href="/#ecosystem">Gillani Enterprises</a><a href="/#ecosystem">Gillani Trading</a><a href="/#ecosystem">King Bridge Regal Trading L.L.C.</a><a href="/#ecosystem">Kingsbridge Metals</a><a href="/#ecosystem">ASM Buildings</a><a href="/#ecosystem">Touheed Enterprises</a></div></nav>
+<div class="ftr-links"><a href="/group-companies/#gillani-enterprises">Gillani Enterprises</a><a href="/group-companies/#gillani-trading">Gillani Trading</a><a href="/group-companies/#king-bridge-regal-trading">King Bridge Regal Trading L.L.C.</a><a href="/group-companies/#kingsbridge-metals">Kingsbridge Metals</a><a href="/group-companies/#asm-buildings">ASM Buildings</a><a href="/group-companies/#touheed-enterprises">Touheed Enterprises</a></div></nav>
 <div data-rv="up"><div class="ftr-t">Contact</div>
 <address>Building 113, First Floor, Raya Fairways Commercial, DHA Phase 6, Lahore, Pakistan<br><br>Phone: <a href="tel:+923001114901">+92 300 1114901</a><br>Email: <a href="mailto:gillanienterprises@gmail.com">gillanienterprises@gmail.com</a><br>Website: <a href="/">gillanigroupofcompanies.com</a></address></div>
 </div>
