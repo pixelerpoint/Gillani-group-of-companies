@@ -268,10 +268,12 @@
     var real = $$('.pcard', track), n = real.length;
     function cloneSet() { var f = d.createDocumentFragment(); real.forEach(function (c) { var k = c.cloneNode(true); k.setAttribute('aria-hidden', 'true'); $$('img', k).forEach(function (i) { i.alt = ''; }); f.appendChild(k); }); return f; }
     track.insertBefore(cloneSet(), track.firstChild); track.appendChild(cloneSet());
-    var pi = n, pHover = false, pUser = false, cardW = 940;
+    var pi = n, pHover = false, pUser = false, cardW = 400;
     function layout(anim) {
       var W = vw(), side = Math.min(80, Math.max(20, 0.05 * W)), left = (W > 1600 ? (W - 1600) / 2 : 0) + side;
-      cardW = Math.round(Math.min(940, Math.max(260, (W - left) * 0.8)));
+      // three cards across on desktop, two on tablet, one (with a peek of the next) on phones
+      var avail = Math.min(W, 1600) - 2 * side, per = W >= 1180 ? 3 : W >= 700 ? 2 : 1;
+      cardW = per === 1 ? Math.round(avail * 0.86) : Math.floor((avail - (per - 1) * 24) / per);
       $$('.pcard', track).forEach(function (c) { c.style.width = cardW + 'px'; });
       track.style.transition = anim && !reduced ? '' : 'none';
       track.style.transform = 'translateX(' + (left - pi * (cardW + 24)) + 'px)';
