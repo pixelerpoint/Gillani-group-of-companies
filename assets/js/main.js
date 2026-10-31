@@ -334,31 +334,6 @@
     });
   });
 
-  /* ---------- tabs (ARIA: arrows, Home/End; links with data-tab open a tab) ---------- */
-  $$('[role="tablist"]').forEach(function (list) {
-    var tabs = $$('[role="tab"]', list);
-    function select(tab, focus) {
-      tabs.forEach(function (t) {
-        var on = t === tab, panel = d.getElementById(t.getAttribute('aria-controls'));
-        t.setAttribute('aria-selected', on ? 'true' : 'false'); t.tabIndex = on ? 0 : -1; panel.hidden = !on;
-      });
-      if (focus) tab.focus();
-    }
-    tabs.forEach(function (t, i) {
-      t.addEventListener('click', function () { select(t); });
-      t.addEventListener('keydown', function (e) {
-        var k = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
-        if (k == null) return; e.preventDefault(); select(tabs[(k + tabs.length) % tabs.length], true);
-      });
-    });
-    $$('[data-tab]').forEach(function (a) { a.addEventListener('click', function () { var t = d.getElementById(a.getAttribute('data-tab')); if (t && tabs.indexOf(t) > -1) select(t); }); });
-  });
-
-  /* ---------- accordion ---------- */
-  $$('.faq-q').forEach(function (b) {
-    b.addEventListener('click', function () { var o = b.getAttribute('aria-expanded') !== 'true'; b.setAttribute('aria-expanded', o ? 'true' : 'false'); b.parentNode.parentNode.classList.toggle('open', o); });
-  });
-
   /* ---------- forms that send an enquiry through WhatsApp ---------- */
   $$('form[data-wa]').forEach(function (f) {
     var status = $('.form-status', f);
