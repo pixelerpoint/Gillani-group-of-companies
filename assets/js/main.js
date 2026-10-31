@@ -264,37 +264,6 @@
     gwSize();
   }
 
-  /* ---------- hero carousel ---------- */
-  var hero = $('#hero');
-  if (hero) {
-    var slides = $$('.slide', hero), progBar = $('[data-progbar]'), slideNum = $('#slideNum'), heroToggle = $('#heroToggle');
-    // the slow zoom and the progress bar are CSS animations (7s); the bar's end moves to the next slide
-    var cur = 0, hovered = false, userPaused = false;
-    function show(i) {
-      cur = (i + slides.length) % slides.length;
-      slides.forEach(function (s, k) {
-        var on = k === cur; s.classList.toggle('on', on); s.setAttribute('aria-hidden', on ? 'false' : 'true');
-        $$('a', s).forEach(function (a) { a.tabIndex = on ? 0 : -1; });
-      });
-      loadImgs(slides[cur]); loadImgs(slides[(cur + 1) % slides.length]);
-      slideNum.textContent = '0' + (cur + 1);
-      progBar.style.animation = 'none'; void progBar.offsetWidth; progBar.style.animation = '';
-    }
-    function setPaused() { hero.classList.toggle('paused', hovered || userPaused); }
-    progBar.addEventListener('animationend', function () { show(cur + 1); });
-    w.addEventListener('load', function () { setTimeout(function () { slides.forEach(loadImgs); }, 4000); });
-    $('#heroPrev').addEventListener('click', function () { show(cur - 1); });
-    $('#heroNext').addEventListener('click', function () { show(cur + 1); });
-    heroToggle.addEventListener('click', function () { userPaused = !userPaused; heroToggle.textContent = userPaused ? 'Play' : 'Pause'; setPaused(); });
-    hero.addEventListener('mouseenter', function () { hovered = true; setPaused(); });
-    hero.addEventListener('mouseleave', function () { hovered = false; setPaused(); });
-    hero.addEventListener('focusin', function () { hovered = true; setPaused(); });
-    hero.addEventListener('focusout', function () { hovered = false; setPaused(); });
-    var tx = 0;
-    hero.addEventListener('touchstart', function (e) { tx = e.touches[0].clientX; }, { passive: true });
-    hero.addEventListener('touchend', function (e) { var dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 50) show(dx < 0 ? cur + 1 : cur - 1); });
-  }
-
   /* ---------- projects carousel (infinite loop) ---------- */
   var track = $('#track');
   if (track) {
