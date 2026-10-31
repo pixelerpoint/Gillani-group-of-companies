@@ -1,0 +1,13 @@
+# old single-service pages now live as sections of /services/
+/services/steel-indenting-import/ /services/#importer 301
+/services/steel-indenting-import /services/#importer 301
+/services/local-trading/ /services/#local-trading 301
+/services/local-trading /services/#local-trading 301
+/services/export-international-trade/ /services/#exporter 301
+/services/export-international-trade /services/#exporter 301
+/services/transportation/ /services/#clearance 301
+/services/transportation /services/#clearance 301
+/services/pre-engineered-steel-buildings/ /services/#steel-buildings 301
+/services/pre-engineered-steel-buildings /services/#steel-buildings 301
+/services/construction-infrastructure/ /services/#construction 301
+/services/construction-infrastructure /services/#construction 301

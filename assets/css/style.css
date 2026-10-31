@@ -1220,3 +1220,67 @@ html{scroll-padding-top:64px}
 .fx-q{align-self:stretch;justify-content:center}
 .rib li{font-size:17px}
 }
+/* services page: overview with a photo collage */
+.svo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(40px,6vw,110px);align-items:center}
+.svo-flow{list-style:none;margin:32px 0 0;padding:0;border-top:1px solid #E4E2DA}
+.svo-flow li{display:grid;grid-template-columns:110px 1fr auto;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid #E4E2DA}
+.svo-flow b{font:300 28px/1 Sora,sans-serif;letter-spacing:-.02em;color:#0F3A2E}
+.svo-flow span{font-size:15px;line-height:1.5;color:#3d4a43}
+.svo-flow a,.svo-flow a:hover{display:flex;align-items:center;min-height:40px;padding:0 12px;border:1px solid #D2A64B;font:600 12px Inter,sans-serif;letter-spacing:.08em;color:#0F3A2E;transition:background-color .3s ease}
+.svo-flow a:hover{background:#D2A64B}
+.svo-m{position:relative;aspect-ratio:1/1}
+.svo-m figure{position:absolute;margin:0;overflow:hidden;background:#0B2E24;box-shadow:0 28px 50px -30px rgba(11,46,36,.55)}
+.svo-m img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.svo-m figure:hover img{transform:scale(1.06)}
+.svo-1{left:0;top:0;width:62%;height:56%}
+.svo-2{right:0;top:18%;width:46%;height:42%;border:8px solid #fff}
+.svo-3{left:14%;bottom:0;width:58%;height:38%;border:8px solid #fff}
+.svo-badge{position:absolute;right:4%;bottom:6%;display:flex;flex-direction:column;gap:4px;padding:16px 20px;background:#0F3A2E;color:#fff;border-top:3px solid #D2A64B}
+.svo-badge b{font:200 40px/1 Sora,sans-serif;color:#D2A64B}
+.svo-badge span{font:600 11px/1.4 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+/* services page: six service cards */
+.svs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.sv{scroll-margin-top:150px;display:flex;flex-direction:column;background:#fff;border:1px solid #E4E2DA;transition:border-color .4s ease,box-shadow .4s ease,translate .4s cubic-bezier(.2,.7,.2,1)}
+.sv:hover{border-color:#D2A64B;translate:0 -6px;box-shadow:0 26px 48px -28px rgba(11,46,36,.5)}
+.sv:target{border-color:#D2A64B;box-shadow:0 0 0 3px rgba(210,166,75,.35)}
+.sv-m{position:relative;aspect-ratio:16/10;overflow:hidden;background:#0B2E24}
+.sv-m img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.sv:hover .sv-m img{transform:scale(1.06)}
+.sv-n{position:absolute;left:0;top:0;padding:10px 16px;font:300 22px/1 Sora,sans-serif;color:#D2A64B;background:#0B2E24}
+.sv-g{position:absolute;right:12px;top:12px;padding:6px 12px;background:#D2A64B;color:#0B2E24;font:600 10.5px Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase}
+.sv-b{flex:1;display:flex;flex-direction:column;padding:24px 24px 26px}
+.sv-top{display:flex;align-items:center;gap:12px}
+.sv-i{display:flex;align-items:center;justify-content:center;flex:none;width:44px;height:44px;background:#0F3A2E;color:#D2A64B;transition:background-color .4s ease,color .4s ease}
+.sv:hover .sv-i{background:#D2A64B;color:#0B2E24}
+.sv-i svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linejoin:round;stroke-linecap:round}
+.sv-co{font:600 10.5px/1.4 Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#164A3B}
+.sv h3{margin:20px 0 0;font:600 clamp(21px,1.7vw,25px)/1.2 Sora,sans-serif;letter-spacing:-.01em;color:#0F3A2E}
+.sv-b>p{margin:10px 0 0;font-size:15px;line-height:1.6;color:#3d4a43}
+.sv-pts{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:8px}
+.sv-pts li{display:flex;gap:10px;font-size:14px;line-height:1.5;color:#121A16}
+.sv-pts li::before{content:"";flex:none;width:7px;height:7px;margin-top:7px;background:#D2A64B;transform:rotate(45deg)}
+.sv-a,.sv-a:hover{display:flex;align-items:center;gap:10px;margin-top:auto;padding-top:20px;font:600 12px Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#0F3A2E}
+.sv-a span{color:#D2A64B;transition:translate .3s ease}
+.sv-a:hover span{translate:4px 0}
+/* services page: moving gallery of finished work */
+.sv-work .sec-head{align-items:flex-end}
+.gal{overflow:hidden;margin-top:8px}
+.gal-t{display:flex;width:max-content;animation:clm 60s linear infinite}
+.gal:hover .gal-t{animation-play-state:paused}
+.gal ul{list-style:none;margin:0;padding:0 20px 0 0;display:flex;gap:20px}
+.gal figure{position:relative;margin:0;width:clamp(260px,26vw,400px);aspect-ratio:4/3;overflow:hidden;background:#164A3B}
+.gal img{width:100%;height:100%;object-fit:cover;transition:transform .8s ease}
+.gal figure:hover img{transform:scale(1.06)}
+.gal figcaption{position:absolute;left:0;right:0;bottom:0;padding:40px 18px 16px;background:linear-gradient(0deg,rgba(11,46,36,.9),rgba(11,46,36,0));font:600 15px/1.3 Sora,sans-serif;color:#fff}
+@media (prefers-reduced-motion:reduce){.gal-t{animation:none;flex-wrap:wrap}.gal ul+ul{display:none}.gal ul{flex-wrap:wrap;padding:0 20px}}
+@media (max-width:1179.98px){
+.svo{grid-template-columns:1fr}
+.svo-m{max-width:620px}
+.svs{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:699.98px){
+.svs{grid-template-columns:1fr}
+.svo-flow li{grid-template-columns:80px 1fr;gap:6px 14px}
+.svo-flow a{grid-column:2;justify-self:start}
+.svo-flow b{font-size:22px}
+}
