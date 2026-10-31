@@ -308,6 +308,24 @@
     p.addEventListener('mouseleave', off); p.addEventListener('blur', off);
   });
 
+  /* ---------- product category showcase: the active category drives the sticky picture ---------- */
+  $$('.fx').forEach(function (fx) {
+    var cats = $$('.fx-cat', fx), vis = $$('.fx-v', fx), links = $$('.fx-nav a', fx), num = $('.fx-count b', fx), bar = $('.fx-prog span', fx);
+    function set(k) {
+      cats.forEach(function (c, i) { c.classList.toggle('on', i === k); if (i <= k) c.classList.add('seen'); });
+      vis.forEach(function (v, i) { v.classList.toggle('on', i === k); });
+      links.forEach(function (a, i) { a.classList.toggle('on', i === k); });
+      if (num) num.textContent = '0' + (k + 1);
+      if (bar) bar.style.transform = 'scaleX(' + ((k + 1) / cats.length) + ')';
+    }
+    if ('IntersectionObserver' in w) {
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) set(cats.indexOf(e.target)); });
+      }, { rootMargin: '-45% 0px -45% 0px' });
+      cats.forEach(function (c) { io.observe(c); });
+    } else cats.forEach(function (c) { c.classList.add('on', 'seen'); });
+  });
+
   /* ---------- product cards pre-select their product in the quote form ---------- */
   $$('[data-pick]').forEach(function (a) {
     a.addEventListener('click', function () {
