@@ -11,3 +11,6 @@
 /services/pre-engineered-steel-buildings /services/#steel-buildings 301
 /services/construction-infrastructure/ /services/#construction 301
 /services/construction-infrastructure /services/#construction 301
+# Raw Materials was removed from the product range
+/products/raw-materials/ /#products 301
+/products/raw-materials /#products 301
