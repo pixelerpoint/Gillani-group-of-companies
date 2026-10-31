@@ -1153,3 +1153,13 @@ html{scroll-padding-top:64px}
 .pg-b{left:14px;right:14px;bottom:14px}
 .pg-a{font-size:10px;letter-spacing:.1em}
 }
+.pgrid.c3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.pgrid.c3 .pg-c{aspect-ratio:4/3}
+.pgrid.c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:1179.98px){.pgrid.c4{grid-template-columns:repeat(2,minmax(0,1fr))}.pgrid.c4 .pg-c{aspect-ratio:4/3}}
+@media (max-width:699.98px){
+.pgrid.c3{grid-template-columns:1fr}
+.pgrid.c3>li:last-child{grid-column:auto}
+.pgrid.c4>li:last-child{grid-column:auto}
+.pgrid.c4>li:last-child .pg-c{aspect-ratio:4/3}
+}
