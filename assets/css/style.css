@@ -208,7 +208,7 @@ main>section:not(.xs){content-visibility:auto;contain-intrinsic-size:auto 1200px
 .chq-by span{font-size:14px}
 
 /* about: presence */
-.pres{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px}
+.pres{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
 .pres li{padding:28px 24px 30px;background:#fff;border-top:3px solid #D2A64B;transition:background-color .4s ease,translate .4s ease}
 .pres li:hover{background:#0F3A2E;translate:0 -6px}
 .pres b{display:block;font:200 clamp(44px,4.4vw,68px)/1 Sora,sans-serif;letter-spacing:-.03em;color:#0F3A2E;transition:color .4s ease}
@@ -267,7 +267,7 @@ main>section:not(.xs){content-visibility:auto;contain-intrinsic-size:auto 1200px
 .ct-d{margin-top:auto;padding-top:24px;font-size:14px;color:#3d4a43;transition:color .45s ease}
 .ct-c:hover .ct-i,.ct-c:focus-visible .ct-i{background:#D2A64B;color:#0B2E24}
 .ct-c:hover .ct-k,.ct-c:hover .ct-v,.ct-c:hover .ct-d,.ct-c:focus-visible .ct-k,.ct-c:focus-visible .ct-v,.ct-c:focus-visible .ct-d{color:#fff}
-.of-g{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px}
+.of-g{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
 .of-c{padding:28px 24px;background:#fff;border-top:3px solid #D2A64B}
 .of-k{font:600 11px Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#164A3B}
 .of-c h3{margin:12px 0 0;font:600 20px/1.25 Sora,sans-serif;color:#0F3A2E}
@@ -731,7 +731,7 @@ html{scroll-padding-top:64px}
 .fh-in{grid-template-columns:1fr}
 .fh-cards{display:none}
 .chq-in{grid-template-columns:1fr}
-.pres{grid-template-columns:repeat(3,minmax(0,1fr))}
+.pres{grid-template-columns:repeat(2,minmax(0,1fr))}
 .co-row{grid-template-columns:1fr;gap:28px}
 .co-row:nth-child(even) .co-logo{order:0}
 .co-logo{max-width:560px}
@@ -1115,6 +1115,7 @@ html{scroll-padding-top:64px}
 .lite .wc h3{color:#0F3A2E}
 .lite .wc p{color:#3d4a43}
 .white .pres li{background:#F5F4EF}
+.white .pres li:hover{background:#0F3A2E}
 @media (max-width:1179.98px){
 .st5{grid-template-columns:repeat(2,minmax(0,1fr));padding-top:0}
 .st5::before,.st5-dot{display:none}
