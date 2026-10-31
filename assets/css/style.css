@@ -208,14 +208,6 @@ main>section:not(.xs){content-visibility:auto;contain-intrinsic-size:auto 1200px
 .chq-by span{font-size:14px}
 
 /* about: presence */
-.pres{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px}
-.pres li{padding:28px 24px 30px;background:#fff;border-top:3px solid #D2A64B;transition:background-color .4s ease,translate .4s ease}
-.pres li:hover{background:#0F3A2E;translate:0 -6px}
-.pres b{display:block;font:200 clamp(44px,4.4vw,68px)/1 Sora,sans-serif;letter-spacing:-.03em;color:#0F3A2E;transition:color .4s ease}
-.pres span{display:block;margin-top:16px;font:600 12px/1.4 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#0F3A2E;transition:color .4s ease}
-.pres small{display:block;margin-top:6px;font-size:14px;line-height:1.5;color:#3d4a43;transition:color .4s ease}
-.pres li:hover b{color:#D2A64B}
-.pres li:hover span,.pres li:hover small{color:#fff}
 .eco-more{margin-top:clamp(40px,5vw,64px);text-align:center}
 
 /* group companies */
@@ -732,7 +724,6 @@ html{scroll-padding-top:64px}
 .fh-in{grid-template-columns:1fr}
 .fh-cards{display:none}
 .chq-in{grid-template-columns:1fr}
-.pres{grid-template-columns:repeat(3,minmax(0,1fr))}
 .co-row{grid-template-columns:1fr;gap:28px}
 .co-row:nth-child(even) .co-logo{order:0}
 .co-logo{max-width:560px}
@@ -802,7 +793,6 @@ html{scroll-padding-top:64px}
 .ov-badge{left:16px;bottom:80px;padding:14px 16px}
 .ov-badge b{font-size:32px}
 .fcta-in{grid-template-columns:1fr}
-.pres{grid-template-columns:repeat(2,minmax(0,1fr))}
 .pf-img{min-height:240px}
 .ct-g,.of-g{grid-template-columns:1fr}
 .co-logo{padding:40px 28px}
