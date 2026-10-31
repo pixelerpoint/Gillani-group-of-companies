@@ -292,6 +292,13 @@
     modal.hidden = false; lock(); $('#q-name').focus();
   }
   function closeQuote() { modal.hidden = true; lock(); if (opener) opener.focus(); }
+  /* ---------- client logos: pause / play ---------- */
+  var clBtn = $('#clToggle');
+  if (clBtn) clBtn.addEventListener('click', function () {
+    var p = $('.cl-wrap').classList.toggle('paused');
+    clBtn.setAttribute('aria-pressed', String(p)); clBtn.textContent = p ? 'Play logos' : 'Pause logos';
+  });
+
   $$('[data-quote]').forEach(function (b) { b.addEventListener('click', openQuote); });
   $$('[data-close]', modal).forEach(function (b) { b.addEventListener('click', closeQuote); });
   modal.addEventListener('click', function (e) { if (e.target === modal) closeQuote(); });
