@@ -1126,3 +1126,30 @@ html{scroll-padding-top:64px}
 .st5>li:last-child{grid-column:auto}
 .lite .chq-r{padding:24px 20px}
 }
+/* product photo cards: image and name only */
+.pgrid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}
+.pgrid>li{display:flex}
+.pg-c,.pg-c:hover{position:relative;isolation:isolate;overflow:hidden;flex:1;display:block;aspect-ratio:3/4;background:#0B2E24;color:#fff}
+.pg-c img{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.pg-c::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(11,46,36,.92) 0%,rgba(11,46,36,.35) 42%,rgba(11,46,36,0) 65%);transition:background-color .4s ease}
+.pg-c::before{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:#D2A64B;transform:scaleX(0);transform-origin:left;transition:transform .5s ease}
+.pg-c:hover img,.pg-c:focus-visible img{transform:scale(1.07)}
+.pg-c:hover::before,.pg-c:focus-visible::before{transform:scaleX(1)}
+.pg-c:focus-visible{outline:3px solid #D2A64B;outline-offset:3px}
+.pg-n{position:absolute;left:0;top:0;padding:8px 12px;font:300 15px/1 Sora,sans-serif;color:#D2A64B;background:#0B2E24}
+.pg-b{position:absolute;left:18px;right:18px;bottom:18px;display:flex;flex-direction:column;gap:8px}
+.pg-t{font:600 clamp(19px,1.5vw,23px)/1.2 Sora,sans-serif;letter-spacing:-.01em}
+.pg-a{display:flex;align-items:center;gap:8px;font:600 11px Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#D2A64B;opacity:.85;transition:opacity .3s ease,gap .3s ease}
+.pg-c:hover .pg-a{opacity:1;gap:12px}
+.pg-more{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:28px;padding-top:24px;border-top:1px solid #E4E2DA}
+.pg-more>span{font:600 11px Inter,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#164A3B}
+.pg-more ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.pg-more li{padding:8px 14px;background:#fff;border:1px solid #E4E2DA;font-size:14px;font-weight:500;color:#0F3A2E}
+@media (max-width:1179.98px){.pgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:699.98px){
+.pgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.pgrid>li:last-child{grid-column:span 2}
+.pgrid>li:last-child .pg-c{aspect-ratio:16/9}
+.pg-b{left:14px;right:14px;bottom:14px}
+.pg-a{font-size:10px;letter-spacing:.1em}
+}

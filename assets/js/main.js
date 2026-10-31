@@ -308,6 +308,14 @@
     p.addEventListener('mouseleave', off); p.addEventListener('blur', off);
   });
 
+  /* ---------- product cards pre-select their product in the quote form ---------- */
+  $$('[data-pick]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      var sel = $(a.getAttribute('data-pick-to'));
+      if (sel) { sel.value = a.getAttribute('data-pick'); sel.dispatchEvent(new Event('change', { bubbles: true })); }
+    });
+  });
+
   /* ---------- tabs (ARIA: arrows, Home/End; links with data-tab open a tab) ---------- */
   $$('[role="tablist"]').forEach(function (list) {
     var tabs = $$('[role="tab"]', list);
