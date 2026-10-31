@@ -334,6 +334,33 @@
     });
   });
 
+  /* ---------- projects gallery: type filters and "show all" ---------- */
+  var pjGrid = $('#pjGrid');
+  if (pjGrid) {
+    var pjs = $$('.pj', pjGrid), pjChips = $$('.pj-chip'), pjMore = $('#pjMore'), pjCount = $('#pjCount'), pjAll = false, pjCat = 'all';
+    function pjShow() {
+      var shown = 0, match = 0;
+      pjs.forEach(function (p) {
+        var ok = pjCat === 'all' || p.getAttribute('data-cat') === pjCat;
+        if (ok) match++;
+        var vis = ok && (pjAll || pjCat !== 'all' || !p.hasAttribute('data-more'));
+        if (vis && p.hidden) { p.classList.remove('in'); void p.offsetWidth; p.classList.add('in'); }
+        p.hidden = !vis; if (vis) shown++;
+      });
+      pjCount.textContent = 'Showing ' + shown + ' of ' + match + ' projects';
+      pjMore.hidden = shown >= match;
+    }
+    pjChips.forEach(function (b) {
+      b.addEventListener('click', function () {
+        pjCat = b.getAttribute('data-filter');
+        pjChips.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        pjShow();
+      });
+    });
+    pjMore.addEventListener('click', function () { pjAll = true; pjShow(); });
+    pjShow();
+  }
+
   /* ---------- product cards pre-select their product in the quote form ---------- */
   $$('[data-pick]').forEach(function (a) {
     a.addEventListener('click', function () {
