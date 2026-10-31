@@ -168,8 +168,8 @@
   var xs = $('#showcase');
   if (xs) {
     var xsS = $$('.xs-s', xs), xsC = $$('.xs-card', xs), xsN = xsS.length, xsCur = 0, xsBusy = false;
-    var xsBar = $('#xsProg'), xsNum = $('#xsNum'), xsBtn = $('#xsToggle'), XS_DUR = 7000;
-    var xsEl = 0, xsLast = 0, xsUser = reduced, xsHov = false, xsSeen = true;
+    var xsBar = $('#xsProg'), xsNum = $('#xsNum'), xsBtn = $('#xsToggle'), XS_DUR = 1500;
+    var xsEl = 0, xsLast = 0, xsUser = reduced, xsSeen = true;
     xsBtn.textContent = xsUser ? 'Play' : 'Pause';
     function xsCards() {
       xsC.forEach(function (c, i) {
@@ -211,16 +211,12 @@
     $('#xsNext').addEventListener('click', function () { xsGo(xsCur + 1, 'card'); });
     $('#xsPrev').addEventListener('click', function () { xsGo(xsCur - 1, 'prev'); });
     xsBtn.addEventListener('click', function () { xsUser = !xsUser; xsBtn.textContent = xsUser ? 'Play' : 'Pause'; });
-    xs.addEventListener('mouseenter', function () { xsHov = true; });
-    xs.addEventListener('mouseleave', function () { xsHov = false; });
-    xs.addEventListener('focusin', function () { xsHov = true; });
-    xs.addEventListener('focusout', function () { xsHov = false; });
     var xsTx = 0;
     xs.addEventListener('touchstart', function (e) { xsTx = e.touches[0].clientX; }, { passive: true });
     xs.addEventListener('touchend', function (e) { var dx = e.changedTouches[0].clientX - xsTx; if (Math.abs(dx) > 50) xsGo(dx < 0 ? xsCur + 1 : xsCur - 1, dx < 0 ? 'card' : 'prev'); });
     if ('IntersectionObserver' in w) new IntersectionObserver(function (e) { xsSeen = e[0].isIntersecting; }).observe(xs);
     (function tick(now) {
-      if (xsLast && !xsUser && !xsHov && xsSeen && !d.hidden) xsEl += now - xsLast;
+      if (xsLast && !xsUser && !xsBusy && xsSeen && !d.hidden) xsEl += now - xsLast;
       xsLast = now;
       xsBar.style.transform = 'scaleX(' + Math.min(1, xsEl / XS_DUR).toFixed(4) + ')';
       if (xsEl >= XS_DUR) xsGo(xsCur + 1, 'card');
@@ -228,6 +224,44 @@
     })(0);
     xsCards();
     loadImgs(xsS[1]);
+  }
+
+  /* ---------- growth journey: scroll moves the cards sideways (wide screens) or fills a rail (small screens) ---------- */
+  var gw = $('#grow');
+  if (gw) {
+    var gwPin = $('.gw-pin', gw), gwTrack = $('.gw-track', gw), gwSteps = $$('.gw-step', gw), gwFill = $('.gw-fill', gw), gwNum = $('#gwNum');
+    var gwDist = 0, gwPinned = false, gwQueued = false;
+    function gwSize() {
+      gwPinned = vw() >= 1180 && !reduced;
+      gw.classList.toggle('pinned', gwPinned);
+      gwTrack.style.transform = '';
+      if (gwPinned) {
+        gwDist = Math.max(0, gwTrack.scrollWidth - gwPin.clientWidth);
+        gw.style.height = (gwPin.offsetHeight + gwDist) + 'px';
+      } else gw.style.height = '';
+      gwTick();
+    }
+    function gwTick() {
+      gwQueued = false;
+      var r = gw.getBoundingClientRect(), vh = w.innerHeight, p, k;
+      if (gwPinned) {
+        p = gwDist ? Math.min(1, Math.max(0, (parseFloat(getComputedStyle(gwPin).top) - r.top) / gwDist)) : 0;
+        gwTrack.style.transform = 'translate3d(' + (-p * gwDist).toFixed(1) + 'px,0,0)';
+        gwFill.style.transform = 'scaleX(' + p.toFixed(4) + ')';
+        k = Math.round(p * (gwSteps.length - 1));
+      } else {
+        p = Math.min(1, Math.max(0, (vh * 0.6 - r.top) / r.height));
+        gwFill.style.transform = 'scaleY(' + p.toFixed(4) + ')';
+        k = -1;
+        gwSteps.forEach(function (s, i) { if (s.getBoundingClientRect().top < vh * 0.6) k = i; });
+      }
+      gwSteps.forEach(function (s, i) { s.classList.toggle('on', i === k); s.classList.toggle('done', i < k); });
+      gwNum.textContent = '0' + (Math.max(0, k) + 1);
+    }
+    w.addEventListener('scroll', function () { if (!gwQueued) { gwQueued = true; requestAnimationFrame(gwTick); } }, { passive: true });
+    w.addEventListener('resize', gwSize);
+    w.addEventListener('load', gwSize);
+    gwSize();
   }
 
   /* ---------- hero carousel ---------- */
