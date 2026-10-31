@@ -1161,8 +1161,9 @@ html{scroll-padding-top:64px}
 }
 /* product category showcase: a sticky picture on the left changes as each category scrolls past */
 .fx{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,5vw,88px);align-items:start}
-.fx-side{position:sticky;top:130px}
-.fx-vis{position:relative;aspect-ratio:4/3;overflow:hidden;background:#0B2E24;box-shadow:0 30px 60px -34px rgba(11,46,36,.6)}
+/* sits below the header (76px) and the page menu (55px) with a clear gap */
+.fx-side{position:sticky;top:164px}
+.fx-vis{position:relative;aspect-ratio:4/3;max-height:calc(100vh - 290px);min-height:300px;width:100%;overflow:hidden;background:#0B2E24;box-shadow:0 30px 60px -34px rgba(11,46,36,.6)}
 .fx-v{position:absolute;inset:0;margin:0;clip-path:inset(0 0 100% 0);transition:clip-path .9s cubic-bezier(.75,0,.2,1)}
 .fx-v.on{clip-path:inset(0 0 0 0);z-index:1}
 .fx-v img{width:100%;height:100%;object-fit:cover;transform:scale(1.12);transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
@@ -1179,7 +1180,7 @@ html{scroll-padding-top:64px}
 .fx-nav a span{font:300 12px Sora,sans-serif;color:#D2A64B}
 .fx-nav a:hover{border-color:#D2A64B}
 .fx-nav a.on{background:#0F3A2E;border-color:#0F3A2E;color:#fff}
-.fx-cat{min-height:min(78vh,720px);display:flex;flex-direction:column;justify-content:center;padding:40px 0;border-top:1px solid #E4E2DA;opacity:.35;transition:opacity .6s ease}
+.fx-cat{scroll-margin-top:150px;min-height:min(78vh,720px);display:flex;flex-direction:column;justify-content:center;padding:40px 0;border-top:1px solid #E4E2DA;opacity:.35;transition:opacity .6s ease}
 .fx-cat:first-child{border-top:0}
 .fx-cat.on{opacity:1}
 .fx-m{display:none}
