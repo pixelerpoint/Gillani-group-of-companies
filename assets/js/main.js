@@ -13,12 +13,6 @@
       i.src = i.dataset.src; i.removeAttribute('data-src'); i.removeAttribute('data-srcset');
     });
   }
-  function whenNear(el, fn) {
-    if (!('IntersectionObserver' in w)) return fn();
-    var o = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { o.disconnect(); fn(); } }, { rootMargin: '800px 0px' });
-    o.observe(el);
-  }
-
   /* ---------- in-page links ---------- */
   // sections skip rendering until near the screen; render them all before jumping to a section so the link lands exactly
   if (location.hash) root.classList.add('cv-off');
@@ -262,42 +256,6 @@
     w.addEventListener('resize', gwSize);
     w.addEventListener('load', gwSize);
     gwSize();
-  }
-
-  /* ---------- projects carousel (infinite loop) ---------- */
-  var track = $('#track');
-  if (track) {
-    var carousel = $('#carousel'), dots = $$('#dots span'), projToggle = $('#projToggle');
-    var real = $$('.pcard', track), n = real.length;
-    function cloneSet() { var f = d.createDocumentFragment(); real.forEach(function (c) { var k = c.cloneNode(true); k.setAttribute('aria-hidden', 'true'); $$('img', k).forEach(function (i) { i.alt = ''; }); f.appendChild(k); }); return f; }
-    track.insertBefore(cloneSet(), track.firstChild); track.appendChild(cloneSet());
-    var pi = n, pHover = false, pUser = false, cardW = 400;
-    function layout(anim) {
-      var W = vw(), side = Math.min(80, Math.max(20, 0.05 * W)), left = (W > 1600 ? (W - 1600) / 2 : 0) + side;
-      // three cards across on desktop, two on tablet, one (with a peek of the next) on phones
-      var avail = Math.min(W, 1600) - 2 * side, per = W >= 1180 ? 3 : W >= 700 ? 2 : 1;
-      cardW = per === 1 ? Math.round(avail * 0.86) : Math.floor((avail - (per - 1) * 24) / per);
-      $$('.pcard', track).forEach(function (c) { c.style.width = cardW + 'px'; });
-      track.style.transition = anim && !reduced ? '' : 'none';
-      track.style.transform = 'translateX(' + (left - pi * (cardW + 24)) + 'px)';
-      var r = ((pi % n) + n) % n; dots.forEach(function (s, k) { s.classList.toggle('on', k === r); });
-    }
-    function pMove(dir) { pi += dir; layout(true); if (reduced) settle(); }
-    function settle() { if (pi < n || pi >= 2 * n) { pi = n + (((pi % n) + n) % n); layout(false); } }
-    track.addEventListener('transitionend', function (e) { if (e.target === track) settle(); });
-    // size the cards only when the section comes near, so start-up stays light
-    whenNear(carousel, function () { loadImgs(track); layout(false); });
-    w.addEventListener('resize', function () { layout(false); });
-    setInterval(function () { if (!pHover && !pUser && !reduced && !d.hidden) pMove(1); }, 6000);
-    $('#projPrev').addEventListener('click', function () { pUser = true; projToggle.textContent = 'Play'; pMove(-1); });
-    $('#projNext').addEventListener('click', function () { pUser = true; projToggle.textContent = 'Play'; pMove(1); });
-    projToggle.addEventListener('click', function () { pUser = !pUser; projToggle.textContent = pUser ? 'Play' : 'Pause'; });
-    carousel.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') pMove(1); else if (e.key === 'ArrowLeft') pMove(-1); });
-    ['mouseenter', 'focusin'].forEach(function (ev) { carousel.addEventListener(ev, function () { pHover = true; }); });
-    ['mouseleave', 'focusout'].forEach(function (ev) { carousel.addEventListener(ev, function () { pHover = false; }); });
-    var px = 0;
-    carousel.addEventListener('touchstart', function (e) { px = e.touches[0].clientX; pHover = true; }, { passive: true });
-    carousel.addEventListener('touchend', function (e) { var dx = e.changedTouches[0].clientX - px; if (Math.abs(dx) > 50) pMove(dx < 0 ? 1 : -1); pHover = false; });
   }
 
   /* ---------- map pins (labels on tap for small screens) ---------- */
