@@ -217,7 +217,8 @@
       requestAnimationFrame(tick);
     })(0);
     xsCards();
-    loadImgs(xsS[1]);
+    // fetch the second slide only after the page has loaded, so it never competes with the first image
+    w.addEventListener('load', function () { loadImgs(xsS[1]); });
   }
 
   /* ---------- growth journey: scroll moves the cards sideways (wide screens) or fills a rail (small screens) ---------- */

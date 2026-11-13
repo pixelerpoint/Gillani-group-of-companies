@@ -10,7 +10,18 @@ RewriteCond %{HTTPS} off [OR]
 RewriteCond %{HTTP_HOST} ^www\. [NC]
 RewriteRule ^ https://gillanigroupofcompanies.com%{REQUEST_URI} [L,R=301]
 
+# ---------- Pages that moved (same as _redirects on Cloudflare) ----------
+RewriteRule ^services/steel-indenting-import/?$ /services/#importer [R=301,NE,L]
+RewriteRule ^services/local-trading/?$ /services/#local-trading [R=301,NE,L]
+RewriteRule ^services/export-international-trade/?$ /services/#exporter [R=301,NE,L]
+RewriteRule ^services/transportation/?$ /services/#clearance [R=301,NE,L]
+RewriteRule ^services/pre-engineered-steel-buildings/?$ /services/#steel-buildings [R=301,NE,L]
+RewriteRule ^services/construction-infrastructure/?$ /services/#construction [R=301,NE,L]
+RewriteRule ^products/raw-materials/?$ /#products [R=301,NE,L]
+
 # ---------- Block private files ----------
+# Cloudflare-only config files
+RewriteRule ^_(redirects|headers)$ - [F,L]
 # Hide git data, dotfiles, docs and source files that live in the repo
 RewriteRule (^|/)\.(?!well-known/) - [F,L]
 <FilesMatch "\.(md|zip|py|sh|log|bak|sql|env|ini|lock|json)$">
